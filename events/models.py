@@ -1,5 +1,8 @@
 from django.db import models
 
+from django.contrib.auth import get_user_model
+from clients.models import *
+
 # Create your models here.
 class Event(models.Model):
     start = models.DateTimeField()
@@ -10,7 +13,7 @@ class Event(models.Model):
     service = models.ForeignKey(Service, on_delete=models.CASCADE, default="Default")
     client = models.ForeignKey(Client, on_delete=models.CASCADE, blank=True, null=True)
     paid = models.BooleanField(default=False)
-    user= models.ForeignKey(User, on_delete=models.CASCADE)
+    user= models.ForeignKey(get_user_model(), on_delete=models.CASCADE)
     done = models.BooleanField(default=False)
 
     @property
