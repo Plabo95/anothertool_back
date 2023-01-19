@@ -1,4 +1,5 @@
 from django.db import models
+from services.models import *
 
 from django.contrib.auth import get_user_model
 from clients.models import *

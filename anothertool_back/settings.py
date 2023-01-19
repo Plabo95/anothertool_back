@@ -39,6 +39,8 @@ INSTALLED_APPS = [
     'core',
     'user',
     'clients',
+    'services',
+    'events',
 ]
 
 REST_FRAMEWORK = {
