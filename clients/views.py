@@ -1,5 +1,5 @@
-from models import *
-from serializers import *
+from clients.models import *
+from clients.serializers import *
 
 #RF
 from rest_framework import status

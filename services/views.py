@@ -5,8 +5,8 @@ from rest_framework.views import APIView, Response
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
 
-from serializers import ServiceSerializer
-from models import *
+from services.serializers import ServiceSerializer
+from services.models import *
 
 # Create your views here.
 @api_view(['GET'])

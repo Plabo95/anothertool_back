@@ -1,5 +1,5 @@
-from models import *
-from serializers import *
+from events.models import *
+from events.serializers import *
 from clients.models import *
 
 from datetime import datetime, timedelta, time, date
