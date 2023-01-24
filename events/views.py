@@ -13,14 +13,14 @@ from rest_framework.permissions import IsAuthenticated
 
 # Create your views here.
 @api_view(['GET'])
-@permission_classes([IsAuthenticated])
+#@permission_classes([IsAuthenticated])
 def events(request, pk):
     events = Event.objects.filter(user=pk).order_by('-start')
     serializer = EventSerializer(events, many=True)
     return Response(serializer.data)
 
 @api_view(['GET'])
-@permission_classes([IsAuthenticated])
+#@permission_classes([IsAuthenticated])
 def nextEvents(request, pk):
     today = datetime.now().date()
     tomorrow = today + timedelta(1)
@@ -32,7 +32,7 @@ def nextEvents(request, pk):
     return Response(serializer.data)
 
 @api_view(['POST'])
-@permission_classes([IsAuthenticated])
+#@permission_classes([IsAuthenticated])
 def createEvent(request):
     serializer = EventSerializer(data=request.data)
     if serializer.is_valid():
@@ -41,7 +41,7 @@ def createEvent(request):
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 @api_view(['DELETE'])
-@permission_classes([IsAuthenticated])
+#@permission_classes([IsAuthenticated])
 def deleteEvent(request, pk, sk):
     event = Event.objects.get(user=pk, id=sk)
     client_id = event.client.id
@@ -52,7 +52,7 @@ def deleteEvent(request, pk, sk):
     return Response()
 
 @api_view(['POST'])
-@permission_classes([IsAuthenticated])
+#@permission_classes([IsAuthenticated])
 def updateEvent(request, pk, sk):
     event = Event.objects.get(user=pk, id=sk)
     serializer = EventSerializer(instance= event, data=request.data)
