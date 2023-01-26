@@ -1,13 +1,10 @@
-from django.urls import path
-from . import views
+from rest_framework.routers import DefaultRouter
+from clients.views import *
 
-app_name = 'clients'
+from rest_framework.routers import DefaultRouter
 
-urlpatterns = [
-    path('all/<str:pk>', views.clients, name="getAll"),
-    path('create', views.createClient, name="create"),
-    path('update/<str:pk>/<str:sk>', views.updateClient, name="update"),
-    path('delete/<str:pk>/<str:sk>', views.deleteClient, name="delete"),
-]
+router = DefaultRouter()
+router.register(r'clients', ClientViewSet)
+urlpatterns = router.urls
 
 
