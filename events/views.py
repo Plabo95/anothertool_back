@@ -9,7 +9,17 @@ from rest_framework import status
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.views import APIView, Response
 from rest_framework.response import Response
-from rest_framework.permissions import IsAuthenticated
+from rest_framework import permissions
+
+
+from rest_framework import viewsets
+
+class EventViewSet(viewsets.ModelViewSet):
+    #list(), .retrieve(), .create(), .update(), .partial_update(), and .destroy()
+    queryset = Event.objects.all()
+    serializer_class = EventSerializer
+    #permission_classes = [permissions.IsAuthenticated]
+
 
 # Create your views here.
 @api_view(['GET'])
@@ -18,7 +28,7 @@ def events(request, pk):
     events = Event.objects.filter(user=pk).order_by('-start')
     serializer = EventSerializer(events, many=True)
     return Response(serializer.data)
-
+ 
 @api_view(['GET'])
 #@permission_classes([IsAuthenticated])
 def nextEvents(request, pk):
