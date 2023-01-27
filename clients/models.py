@@ -7,6 +7,6 @@ class Client(models.Model):
     telf = models.CharField(blank=True, null=True, max_length=16)
     moroso = models.BooleanField(default=False)
     user= models.ForeignKey(get_user_model(), on_delete=models.CASCADE)
-    
+
     def __str__(self):
         return self.name
