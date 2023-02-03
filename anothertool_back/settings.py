@@ -39,6 +39,7 @@ INSTALLED_APPS = [
 
     'core',
     'user',
+    'cars',
     'clients',
     'services',
     'events',
