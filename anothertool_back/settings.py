@@ -41,8 +41,7 @@ INSTALLED_APPS = [
     'user',
     'cars',
     'clients',
-    'services',
-    'events',
+    'repairorders'
 ]
 
 REST_FRAMEWORK = {
