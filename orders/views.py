@@ -6,14 +6,21 @@ from .serializers import *
 
 
 class OrderViewSet(viewsets.ModelViewSet):
-    queryset = Order.objects.all()
 
     def get_serializer_class(self):
         if self.action == 'create' or self.action == 'update':
             return CreateOrderSerializer
         else:
             return OrderSerializer
-    # permission_classes = [permissions.IsAuthenticated]
 
-    # def perform_create(self, serializer):
-    # serializer.save(user=self.request.user)
+    # Si paso un queryset en la url es para filtrar por estado
+    def get_queryset(self):
+        filter_by = self.request.query_params.get('status')
+
+        if filter_by:
+            queryset = Order.objects.filter(
+                status=filter_by).order_by('-updated_at')
+        else:
+            queryset = Order.objects.all().order_by('-updated_at')
+
+        return queryset
