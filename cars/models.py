@@ -10,7 +10,8 @@ class Car(TimeStampModel):
     brand = models.CharField(max_length=255, blank=True, null=True)
     model = models.CharField(max_length=255, blank=True, null=True)
 
-    client = models.ForeignKey(Client, on_delete=models.CASCADE)
+    client = models.ForeignKey(
+        Client, related_name='cars', on_delete=models.CASCADE)
     user = models.ForeignKey(
         get_user_model(), on_delete=models.CASCADE, blank=True, null=True)
 

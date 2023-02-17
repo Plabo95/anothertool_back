@@ -1,13 +1,20 @@
 from rest_framework import serializers
 from .models import Order
-from .choices import OrderState
+from cars.serializers import CarSerializer
 
 
 class OrderSerializer(serializers.ModelSerializer):
-    client_name = serializers.CharField(
-        source='client.name', read_only=True)
+    car = CarSerializer(read_only=True)
 
     class Meta:
         model = Order
-        fields = ('__all__')
+        fields = ('id', 'date_in', 'date_out', 'client_desc',
+                  'diagnostic', 'status', 'car')
         # exclude = ['user']
+
+
+class CreateOrderSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Order
+        fields = ('id', 'date_in', 'date_out', 'client_desc',
+                  'diagnostic', 'status', 'car')
