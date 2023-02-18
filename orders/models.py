@@ -7,7 +7,7 @@ from cars.models import Car
 
 # refering to Work Orders
 class Order(TimeStampModel):
-    date_in = models.DateTimeField()
+    date_in = models.DateTimeField(blank=True, null=True)
     date_out = models.DateTimeField(blank=True, null=True)
     client_desc = models.TextField(blank=True, null=True)
     diagnostic = models.TextField(blank=True, null=True)

@@ -19,8 +19,8 @@ class OrderViewSet(viewsets.ModelViewSet):
 
         if filter_by:
             queryset = Order.objects.filter(
-                status=filter_by).order_by('-updated_at')
+                status=filter_by).order_by('-created_at')
         else:
-            queryset = Order.objects.all().order_by('-updated_at')
+            queryset = Order.objects.all().order_by('-created_at')
 
         return queryset
