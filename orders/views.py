@@ -15,11 +15,17 @@ class OrderViewSet(viewsets.ModelViewSet):
 
     # Si paso un queryset en la url es para filtrar por estado
     def get_queryset(self):
-        filter_by = self.request.query_params.get('status')
+        status_filter = self.request.query_params.get('status')
+        latest_filter = self.request.query_params.get('latest')
 
-        if filter_by:
+        if status_filter:
+            # filter by order status
             queryset = Order.objects.filter(
-                status=filter_by).order_by('-created_at')
+                status=status_filter).order_by('-created_at')
+        elif latest_filter:
+            # Get only n latest items
+            queryset = Order.objects.all().order_by(
+                '-created_at')[:int(latest_filter)]
         else:
             queryset = Order.objects.all().order_by('-created_at')
 
