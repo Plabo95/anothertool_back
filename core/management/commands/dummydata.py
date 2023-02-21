@@ -14,7 +14,7 @@ class Command(BaseCommand):
 
     def handle(self, *args, **kwargs):
         # print('Creating', NUM_CLIENTS, 'clientes')
-        CarFactory.create()
+        CarFactory.create
         # for i in range(NUM_CLIENTS):
-        # ClientFactory.create()
+        # ClientFactory.create_batch(50)
         print(Car.objects.count())
