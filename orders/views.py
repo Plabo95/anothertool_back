@@ -1,3 +1,5 @@
+import datetime
+from django.db.models import Count
 from rest_framework import permissions
 from rest_framework import viewsets
 
@@ -30,3 +32,14 @@ class OrderViewSet(viewsets.ModelViewSet):
             queryset = Order.objects.all().order_by('-created_at')
 
         return queryset
+
+
+class OrderStatsViewSet(viewsets.ReadOnlyModelViewSet):
+    """
+    This only has list and retrieve.
+    """
+    queryset = Order.objects.order_by(
+        'created_at').values('created_at').distinct()
+    # queryset = Order.objects.filter(created_at__lte=datetime.datetime.today(
+    # ), created_at__gt=datetime.datetime.today()-datetime.timedelta(days=30)).distinct('created_at')
+    serializer_class = OrderStatsSerializer
