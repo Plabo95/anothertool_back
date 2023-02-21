@@ -13,8 +13,5 @@ class Command(BaseCommand):
     help = "Generates test data"
 
     def handle(self, *args, **kwargs):
-        # print('Creating', NUM_CLIENTS, 'clientes')
-        CarFactory.create
-        # for i in range(NUM_CLIENTS):
         # ClientFactory.create_batch(50)
-        print(Car.objects.count())
+        OrderFactory.create_batch(50)

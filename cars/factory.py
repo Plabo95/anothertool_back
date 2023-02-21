@@ -1,3 +1,4 @@
+import random
 from clients.factory import ClientFactory
 from .models import Car
 from clients.models import Client
@@ -20,4 +21,4 @@ class CarFactory(DjangoModelFactory):
     brand = faker.vehicle_make()
     model = faker.vehicle_model()
 
-    client = SubFactory(ClientFactory)
+    client = Client.objects.all()[random.randint(1, 25)]

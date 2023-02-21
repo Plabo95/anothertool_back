@@ -14,3 +14,6 @@ class Car(TimeStampModel):
         Client, related_name='cars', on_delete=models.CASCADE)
     user = models.ForeignKey(
         get_user_model(), on_delete=models.CASCADE, blank=True, null=True)
+
+    def __str__(self):
+        return (self.brand + '' + self.model)
