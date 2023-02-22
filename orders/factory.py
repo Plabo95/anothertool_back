@@ -8,17 +8,14 @@ from cars.models import Car
 import factory
 from factory import SubFactory, fuzzy
 from factory.django import DjangoModelFactory
-from factory.faker import faker
-import faker
-
-faker = faker.Faker(locale="es_ES")
 
 
 class OrderFactory(DjangoModelFactory):
-    date_in = faker.date_time()
-    date_out = faker.date_time()
-    client_desc = faker.text()
-    diagnostic = faker.text()
+    created_at = factory.Faker("date_time")
+    date_in = factory.Faker("date_time")
+    date_out = factory.Faker("date_time")
+    client_desc = factory.Faker("text")
+    diagnostic = factory.Faker("text")
     status = fuzzy.FuzzyChoice(OrderState.values).fuzz()
 
     car = SubFactory(CarFactory)
