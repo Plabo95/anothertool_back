@@ -1,15 +1,16 @@
 
 from .models import Client
 from factory.django import DjangoModelFactory
-import faker
+import factory
+# import faker
 
-faker = faker.Faker(locale="es_ES")
+# faker = faker.Faker(locale="es_ES")
 
 
 class ClientFactory(DjangoModelFactory):
-    name = faker.name()
-    phone = faker.phone_number()
-    email = faker.email()
+    name = factory.Faker("name")
+    phone = factory.Faker("phone_number")
+    email = factory.Faker("email")
 
     class Meta:
         model = Client

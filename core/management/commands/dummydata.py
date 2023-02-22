@@ -14,4 +14,12 @@ class Command(BaseCommand):
 
     def handle(self, *args, **kwargs):
         # ClientFactory.create_batch(50)
-        OrderFactory.create_batch(50)
+        print('Deleting all db registers...')
+        Client.objects.all().delete()
+        Car.objects.all().delete()
+        Order.objects.all().delete()
+
+        print('Generating new data...')
+        # ClientFactory.create_batch(20)
+        # CarFactory.create_batch(15)
+        OrderFactory.create_batch(10)

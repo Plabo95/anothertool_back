@@ -6,8 +6,8 @@ from commons.models import TimeStampModel
 
 class Client(TimeStampModel):
     name = models.CharField(max_length=100)
-    phone = models.CharField(blank=True, null=True, unique=True, max_length=16)
-    email = models.EmailField(unique=True)
+    phone = models.CharField(blank=True, null=True, max_length=16)
+    email = models.EmailField()
     moroso = models.BooleanField(default=False)
 
     user = models.ForeignKey(

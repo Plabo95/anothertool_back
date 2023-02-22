@@ -21,7 +21,7 @@ class OrderFactory(DjangoModelFactory):
     diagnostic = faker.text()
     status = fuzzy.FuzzyChoice(OrderState.values).fuzz()
 
-    car = Car.objects.all()[random.randint(0, 5)]
+    car = SubFactory(CarFactory)
 
     class Meta:
         model = Order
