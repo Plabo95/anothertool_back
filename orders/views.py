@@ -3,6 +3,7 @@ from django.db.models import Count
 from rest_framework import permissions
 from rest_framework import viewsets
 
+from django.db.models.functions import TruncDay
 from .models import *
 from .serializers import *
 
@@ -35,11 +36,12 @@ class OrderViewSet(viewsets.ModelViewSet):
 
 
 class OrderStatsViewSet(viewsets.ReadOnlyModelViewSet):
-    """
-    This only has list and retrieve.
-    """
-    queryset = Order.objects.order_by(
-        'created_at').values('created_at').distinct()
-    # queryset = Order.objects.filter(created_at__lte=datetime.datetime.today(
-    # ), created_at__gt=datetime.datetime.today()-datetime.timedelta(days=30)).distinct('created_at')
+    # annotate añade una anotacion en cada objeto del queryset
+    # trunc by day elimina la hora
+    # con values me quedo solo con el valor de fecha
+    # luego vuelvo a anotar la cuenta de id's diferentes
+    queryset = Order.objects.filter(date_in__lte=datetime.datetime.today(
+    ), date_in__gt=datetime.datetime.today()-datetime.timedelta(days=30)).annotate(
+        date=TruncDay('date_in')).values("date").annotate(created_count=Count('id'))
+
     serializer_class = OrderStatsSerializer

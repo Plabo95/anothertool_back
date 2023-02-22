@@ -11,12 +11,11 @@ from factory.django import DjangoModelFactory
 
 
 class OrderFactory(DjangoModelFactory):
-    created_at = factory.Faker("date_time")
-    date_in = factory.Faker("date_time")
-    date_out = factory.Faker("date_time")
+    date_in = factory.Faker("date_time_this_month")
+    date_out = factory.Faker("date_time_this_month")
     client_desc = factory.Faker("text")
     diagnostic = factory.Faker("text")
-    status = fuzzy.FuzzyChoice(OrderState.values).fuzz()
+    status = factory.fuzzy.FuzzyChoice(OrderState.values)
 
     car = SubFactory(CarFactory)
 
