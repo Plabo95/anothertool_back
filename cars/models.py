@@ -6,7 +6,7 @@ from commons.models import TimeStampModel
 
 
 class Car(TimeStampModel):
-    plate = models.CharField(max_length=100)
+    plate = models.CharField(max_length=100, unique=True)
     brand = models.CharField(max_length=255, blank=True, null=True)
     model = models.CharField(max_length=255, blank=True, null=True)
 
