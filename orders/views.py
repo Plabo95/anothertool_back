@@ -7,9 +7,17 @@ from django.utils import timezone
 from django.db.models.functions import TruncDay
 from .models import *
 from .serializers import *
+from django_filters.rest_framework import DjangoFilterBackend
+from rest_framework import filters
 
 
 class OrderViewSet(viewsets.ModelViewSet):
+
+    filter_backends = [DjangoFilterBackend]
+    filterset_fields = {
+        'status': ['exact'],
+        'date_in': ['gte', 'lte'],
+    }
 
     def get_serializer_class(self):
         if self.action == 'create' or self.action == 'update':
@@ -19,7 +27,7 @@ class OrderViewSet(viewsets.ModelViewSet):
 
     # Si paso un queryset en la url es para filtrar por estado
     def get_queryset(self):
-        status_filter = self.request.query_params.get('status')
+        queryset = Order.objects.all().order_by('-created_at')
         latest_filter = self.request.query_params.get('latest')
         period_filter = self.request.query_params.get('period')
 
@@ -33,16 +41,12 @@ class OrderViewSet(viewsets.ModelViewSet):
             if period_filter == 'day':
                 queryset = Order.objects.filter(date_in__lte=timezone.now(),
                                                 date_in__gt=timezone.now()-datetime.timedelta(days=1))
-        if status_filter:
-            # filter by order status
-            queryset = Order.objects.filter(
-                status=status_filter).order_by('-created_at')
         if latest_filter:
             # Get only n latest items
             queryset = Order.objects.all().order_by(
                 '-created_at')[:int(latest_filter)]
 
-        if not status_filter and not latest_filter and not period_filter:
+        if not latest_filter and not period_filter:
             queryset = Order.objects.all().order_by('-created_at')
 
         return queryset
