@@ -3,6 +3,7 @@ from django.db.models import Count
 from rest_framework import permissions
 from rest_framework import viewsets
 
+from django.utils import timezone
 from django.db.models.functions import TruncDay
 from .models import *
 from .serializers import *
@@ -20,16 +21,28 @@ class OrderViewSet(viewsets.ModelViewSet):
     def get_queryset(self):
         status_filter = self.request.query_params.get('status')
         latest_filter = self.request.query_params.get('latest')
+        period_filter = self.request.query_params.get('period')
 
+        if period_filter:
+            if period_filter == 'week':
+                queryset = Order.objects.filter(date_in__lte=timezone.now(
+                ), date_in__gt=timezone.now()-timezone.timedelta(days=7))
+            if period_filter == 'month':
+                queryset = Order.objects.filter(date_in__lte=timezone.now(
+                ), date_in__gt=timezone.now()-timezone.timedelta(days=30))
+            if period_filter == 'day':
+                queryset = Order.objects.filter(date_in__lte=timezone.now(),
+                                                date_in__gt=timezone.now()-datetime.timedelta(days=1))
         if status_filter:
             # filter by order status
             queryset = Order.objects.filter(
                 status=status_filter).order_by('-created_at')
-        elif latest_filter:
+        if latest_filter:
             # Get only n latest items
             queryset = Order.objects.all().order_by(
                 '-created_at')[:int(latest_filter)]
-        else:
+
+        if not status_filter and not latest_filter and not period_filter:
             queryset = Order.objects.all().order_by('-created_at')
 
         return queryset
