@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'user',
     'cars',
     'clients',
+    'invoices',
     'orders',
     'workshop',
 ]
