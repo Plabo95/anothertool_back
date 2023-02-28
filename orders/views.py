@@ -13,6 +13,7 @@ from rest_framework import filters
 
 class OrderViewSet(viewsets.ModelViewSet):
 
+    permission_classes = [permissions.IsAuthenticated]
     filter_backends = [DjangoFilterBackend]
     filterset_fields = {
         'status': ['exact'],
@@ -51,8 +52,12 @@ class OrderViewSet(viewsets.ModelViewSet):
 
         return queryset
 
+    def perform_create(self, serializer):
+        serializer.save(user=self.request.user)
+
 
 class OrderStatsViewSet(viewsets.ReadOnlyModelViewSet):
+    permission_classes = [permissions.IsAuthenticated]
     # annotate añade una anotacion en cada objeto del queryset
     # trunc by day elimina la hora
     # con values me quedo solo con el valor de fecha

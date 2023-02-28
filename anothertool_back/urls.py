@@ -11,7 +11,7 @@ router = DefaultRouter
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/user/token', TokenObtainPairView.as_view(), name='token_obtain_pair'),
-    path('api/token/refresh', TokenRefreshView.as_view(), name='token_refresh'),
+    path('api/user/refresh-token', TokenRefreshView.as_view(), name='token_refresh'),
     path('api/user/', include('user.urls')),
 
     path('api/', include('clients.urls')),
