@@ -5,12 +5,14 @@ from rest_framework_simplejwt.views import (
     TokenRefreshView,
 )
 from rest_framework.routers import DefaultRouter
+from user.views import MyTokenObtainPairView
 
 router = DefaultRouter
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('api/user/token', TokenObtainPairView.as_view(), name='token_obtain_pair'),
+    path('api/user/token', MyTokenObtainPairView.as_view(),
+         name='token_obtain_pair'),
     path('api/user/refresh-token', TokenRefreshView.as_view(), name='token_refresh'),
     path('api/user/', include('user.urls')),
 
