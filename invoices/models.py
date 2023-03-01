@@ -20,7 +20,7 @@ class Invoice(TimeStampModel):
     item = models.ForeignKey(
         InvoiceItem, on_delete=models.CASCADE, blank=True, null=True)
     user = models.ForeignKey(
-        get_user_model(), on_delete=models.CASCADE, blank=True, null=True)
+        get_user_model(), on_delete=models.CASCADE)
 
     def __str__(self):
         return self.name

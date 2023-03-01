@@ -44,11 +44,12 @@ class OrderViewSet(viewsets.ModelViewSet):
                                                 date_in__gt=timezone.now()-datetime.timedelta(days=1))
         if latest_filter:
             # Get only n latest items
-            queryset = Order.objects.all().order_by(
+            queryset = Order.objects.filter(user=self.request.user).order_by(
                 '-created_at')[:int(latest_filter)]
 
         if not latest_filter and not period_filter:
-            queryset = Order.objects.all().order_by('-created_at')
+            queryset = Order.objects.filter(
+                user=self.request.user).order_by('-created_at')
 
         return queryset
 
