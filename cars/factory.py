@@ -1,7 +1,6 @@
-import random
 from clients.factory import ClientFactory
 from .models import Car
-from clients.models import Client
+from core.models import User
 
 import factory
 from faker_vehicle import VehicleProvider
@@ -19,6 +18,7 @@ class CarFactory(DjangoModelFactory):
     model = factory.Faker("vehicle_model")
 
     client = SubFactory(ClientFactory)
+    user = User.objects.get(id=2)
 
     class Meta:
         model = Car
