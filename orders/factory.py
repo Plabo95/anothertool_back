@@ -2,7 +2,7 @@ import random
 from clients.factory import ClientFactory
 from core.models import User
 from cars.factory import CarFactory
-from orders.choices import OrderState
+from invoices.choices import OrderStatus
 from .models import Order
 from cars.models import Car
 
@@ -16,7 +16,7 @@ class OrderFactory(DjangoModelFactory):
     date_out = factory.Faker("date_time_this_month")
     client_desc = factory.Faker("text")
     diagnostic = factory.Faker("text")
-    status = factory.fuzzy.FuzzyChoice(OrderState.values)
+    status = factory.fuzzy.FuzzyChoice(OrderStatus.values)
 
     car = SubFactory(CarFactory)
     user = User.objects.get(id=2)
