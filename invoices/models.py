@@ -20,8 +20,9 @@ class InvoiceItem(TimeStampModel):
 class Invoice(TimeStampModel):
     invoice_number = models.IntegerField(db_index=True)
     date = models.DateTimeField()
-    status = models.CharField(max_length=100, choices=InvoiceStatus.choices,
-                              default=InvoiceStatus.PENDING)
+    expiring_date = models.DateTimeField(blank=True, null=True)
+    status = models.CharField(
+        max_length=100, choices=InvoiceStatus.choices, default=InvoiceStatus.PENDING, blank=True, null=True)
 
     client = models.ForeignKey(Client, on_delete=models.CASCADE)
     item = models.ForeignKey(
