@@ -22,8 +22,8 @@ class Invoice(TimeStampModel):
         max_length=100, choices=InvoiceStatus.choices, default=InvoiceStatus.PENDING, blank=True, null=True)
 
     client = models.ForeignKey(Client, on_delete=models.CASCADE)
-    item = models.ManyToManyField(
-        InvoiceItem,  blank=True, null=True)
+    items = models.ManyToManyField(
+        InvoiceItem)
     user = models.ForeignKey(
         get_user_model(), on_delete=models.CASCADE)
 
