@@ -15,5 +15,5 @@ class InvoiceSerializer(WritableNestedModelSerializer, serializers.ModelSerializ
 
     class Meta:
         model = Invoice
-        fields = ('invoice_number', 'date', 'expiring_date',
+        fields = ('id', 'invoice_number', 'date', 'expiring_date',
                   'status', 'client', 'items',)

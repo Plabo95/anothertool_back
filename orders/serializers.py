@@ -9,7 +9,7 @@ class OrderSerializer(serializers.ModelSerializer):
     class Meta:
         model = Order
         fields = ('id', 'date_in', 'date_out', 'client_desc',
-                  'diagnostic', 'status', 'car', 'created_at')
+                  'diagnostic', 'status', 'car', 'created_at', 'has_invoice')
         # exclude = ['user']
 
 
