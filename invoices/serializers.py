@@ -11,12 +11,12 @@ class InvoiceItemSerializer(serializers.ModelSerializer):
                   'quantity', 'price', 'tax')
 
 
-class InvoiceSerializer(serializers.ModelSerializer):
+class InvoiceSerializer(WritableNestedModelSerializer):
     items = InvoiceItemSerializer(many=True)
 
     class Meta:
         model = Invoice
-        fields = ['invoice_number', 'date', 'expiring_date',
+        fields = ['id', 'invoice_number', 'date', 'expiring_date',
                   'status', 'client', 'taxes', 'total', 'items']
 
     # Method to create first the parent and then all the child objects associated
