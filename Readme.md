@@ -13,3 +13,8 @@
 # Freeze the packages
 
     python -m pip freeze
+
+# Factory faker creating models
+
+    Providers here --> https://faker.readthedocs.io/en/master/providers/faker.providers.python.html
+    To create in batch --> "posts = PostFactory.create_batch(10)"

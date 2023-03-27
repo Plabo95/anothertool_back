@@ -1,17 +1,13 @@
-import random
-from clients.factory import ClientFactory
 from core.models import User
 from cars.factory import CarFactory
 from invoices.choices import OrderStatus
 from .models import Order
-from cars.models import Car
 
 import factory
 from factory import SubFactory
-from factory.django import DjangoModelFactory
 
 
-class OrderFactory(DjangoModelFactory):
+class OrderFactory(factory.django.DjangoModelFactory):
     date_in = factory.Faker("date_time_this_month")
     date_out = factory.Faker("date_time_this_month")
     client_desc = factory.Faker("text")
