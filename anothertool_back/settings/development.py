@@ -1,4 +1,4 @@
-from settings.base import *
+from anothertool_back.settings.base import *
 
 
 SECRET_KEY = 'django-insecure-@cx(ni5t7)g@(+rxf6e8u-2+jte^%^9*iz#n7y-^$vm28ym=zc'

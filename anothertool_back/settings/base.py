@@ -1,7 +1,6 @@
 
 from pathlib import Path
 from datetime import timedelta
-from decouple import config
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -14,11 +13,11 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 CORS_ALLOWED_ORIGINS = [
     'http://localhost:3000',
-    'https://anothertool.es'
-    'https://sendgrid.api-docs.io',
+    'https://anothertool.es',
     'https://anothertool-rose.vercel.app',
     'https://www.anothertool.es',
 ]
+# 'https://sendgrid.api-docs.io',
 
 # Application definition
 
